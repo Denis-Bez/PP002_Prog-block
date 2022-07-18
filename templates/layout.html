@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    {% block head %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    {% endblock %}
+
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <title>{{title}}</title>
+
+</head>
+
+<header>
+
+    <div class="container-fluid"></div>
+    <div class="d-flex flex-row bg-light align-items-center">
+        <div class="col">
+            <nav class="navbar navbar-expand-md">
+                <a class="navbar-brand" href="{{ url_for('.index') }}">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo.png" style="max-height: 40px">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="{{ url_for(menu.dropmenu[0].dropdown_item.url) }}" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ menu['dropmenu'][0]['dropdown_item']['title'] }}
+                            </a>
+                            
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            
+                            {% for d in menu['dropmenu'][0]['items'] %}
+                                <li><a class="dropdown-item" href="{{ url_for(d.url) }}">{{d.title}}</a></li>
+                            {% endfor -%}
+                            
+                            </ul>
+                        </li>
+
+                        {% for m in menu['menu'] %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ url_for(m.url) }}">{{m.title}}</a>
+                        </li>
+                        {% endfor -%}
+
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item m-1">
+                            <a href="/"><img src="{{ url_for('static', filename='img/rus.png') }}"
+                                    style="max-height: 30px" class="img-fluid"></a>
+                            <a href="/eng"><img src="{{ url_for('static', filename='img/eng.png') }}"
+                                    style="max-height: 30px" class="img-fluid"></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+    </div>
+    </div>
+
+</header>
+
+
+<body>
+
+    {% block body %}{% endblock %}
+
+
+</body>
+
+</html>
