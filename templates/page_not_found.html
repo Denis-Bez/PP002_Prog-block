@@ -3,8 +3,9 @@
 {% block body %}
 {{super()}}
 
+<!-- TODO: Multilingual -->
 <p class="my-5 mx-3">Страница не найдена, вернуться на 
-    <a href="{{url_for('index')}}">главную</a> 
+    <a href="{{url_for('.index')}}">главную</a> 
     страницу</p>
 
 {% endblock %}

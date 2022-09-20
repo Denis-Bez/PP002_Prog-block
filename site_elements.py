@@ -2,7 +2,7 @@
 
 # menu = {
 # 'rus': [{'url': 'projects', 'title': 'Проекты'}, {'url': 'contacts', 'title': 'Контакты'}],
-# 'eng': [{'url': '.projects', 'title': 'Projects'}, {'url': '.contacts', 'title': 'Contacts'}]
+# 'en': [{'url': '.projects', 'title': 'Projects'}, {'url': '.contacts', 'title': 'Contacts'}]
 # }
 
 # Navigation panel text
@@ -18,7 +18,7 @@ menu = {
 {'url': 'contacts', 'title': 'Контакты'}
 ]},
 
-'eng': {
+'en': {
 'dropmenu':[
 {'dropdown_item': {'url': '.services', 'title': 'Services'}, 'items': [{'url': '.parsers', 'title': 'Development parsers'},
                                                                        {'url': '.telegram_bots', 'title': 'Development telegram-bots'},
@@ -58,7 +58,7 @@ content = {
     },
 
 
-    'eng': {
+    'en': {
                 'index': """<p class="lead"> How can we be useful for your business: </p>
                 
                 <ol class="list-group list-group-numbered">
