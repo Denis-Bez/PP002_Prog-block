@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container-flex proj-prewiev col-lg-8 mx-auto p-4 py-md-5">
+    {% for item in content %}
+        <div class="row">  
+            <div class="col-md-8 col-sm-12">
+                    <h1>{{ item.title }}</h1>
+                    {{ item.short_discription|safe }}
+                    <div class="mb-5">
+                        <a href="{{ item.url }}" class="btn btn-primary btn-lg px-4">Подробнее</a>
+                    </div> 
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <img src="{{ item.photo }}" class="img-fluid" alt="{{ item.title }}">
+            </div>
+        </div>
+        <hr class="col-5 col-md-3 mb-5">
+    {% endfor %}
+</div>
+
+{% endblock %}

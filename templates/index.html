@@ -7,9 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col">
-            
-                {{ content.index | safe }}
-
+                {% for item in content %}
+                {{ item.content }}
+                {% endfor %}
             </div>
         </div>
     </div>

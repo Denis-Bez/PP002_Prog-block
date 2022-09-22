@@ -2,3 +2,32 @@
 * {font-family: "DejaVu Sans Mono";}
 /* * {font-family: "Marker Felt";} */
 
+:root {
+    --color1: #0068B2;
+}
+
+.proj-prewiev ul {
+    list-style: none;
+    padding: 0;
+}
+.proj-prewiev ul li {
+    padding-left: 28px;
+    position: relative;
+}
+.proj-prewiev ul li+li {
+    margin-top: 10px;
+}
+.proj-prewiev ul i {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 20px;
+    color: var(--color1);
+    line-height: 1;
+}
+
+.container-flex {
+    /* background-color: var(--color1); */
+    margin: 1%;
+    box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1);
+}
