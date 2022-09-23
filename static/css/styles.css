@@ -27,7 +27,30 @@
 }
 
 .container-flex {
-    /* background-color: var(--color1); */
-    margin: 1%;
-    box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1);
+    background-color: #f8f9fa;
+    padding: 1%;
+    margin: 2%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
 }
+header {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.container-flex h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+  .container-flex h2:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: var(--color1);
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
