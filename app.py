@@ -1,25 +1,32 @@
 # Flask libraries
-from flask import Flask, render_template, redirect, flash, url_for, session, request, abort
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, flash, abort
+from flask_mail import Mail, Message
 
 # Configuratins and castom libraries
 from config import CONFIG
 from Class_SQLAlchemy import db, Menu, SEO, projects, Index, contacts, services
 
 # Blueprint block
-# from en.en import en # English language site part
+from en.en import en # English language site part
 
-# Other libraries
-from datetime import datetime
 
 # CONFIGURATION BLOCK
 SECRET_KEY = CONFIG['FLASK_SECRET_KEY']
 application = Flask (__name__)
-# application.register_blueprint(en, url_prefix='/en')
+application.register_blueprint(en, url_prefix='/en')
 
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///content.db'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(application)
+
+application.config["MAIL_DEFAULT_SENDER"] = CONFIG["MAIL_DEFAULT_SENDER"]
+application.config["MAIL_PASSWORD"] = CONFIG["MAIL_PASSWORD"]
+application.config["MAIL_PORT"] = 465
+application.config["MAIL_SERVER"] = "mail.eg-expert.ru"
+application.config["MAIL_USE_TLS"] = False
+application.config["MAIL_USE_SSL"] = True
+application.config["MAIL_USERNAME"] = CONFIG["MAIL_USERNAME"]
+mail = Mail(application)
 
 
 # HEANDLER BLOCK
@@ -58,10 +65,15 @@ def service(service_name):
     return render_template('layout_service.html', general=get_general_content(service_name), content=content)
 
 
-# Errors processing
+# --- Errors processing ---
 @application.errorhandler(404)
 def pageNotFound(error):
     return render_template('page_not_found.html', general=get_general_content('404')), 404
+
+# --- Actions ---
+@application.route("/email", methods=["POST", "GET"])
+def email():
+    pass
 
 
 # --- DATBASE CONTENT GETTING ---
@@ -74,6 +86,6 @@ def get_general_content(url_name):
     except:
         abort(404)
 
-
+# --- START SERVER ---
 if __name__ == "__main__":
     application.run(debug=True)

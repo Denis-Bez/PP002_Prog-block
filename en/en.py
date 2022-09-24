@@ -1,49 +1,60 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, abort
 
-from site_elements import menu, content
-from Class_SQLAlchemy import db, Menu
+from Class_SQLAlchemy import db, Menu, SEO, projects, Index, contacts, services
 
 en = Blueprint('en', __name__, template_folder='templates', static_folder='static')
 
+
+# HEANDLER BLOCK
+# --- Static pages ---
 @en.route('/')
 def index():
-    return render_template('index.html', title='Main page', menu=menu['en'], content=content['en'], cont=get_content([Menu])) # 'en/index_en.html'
+    content = Index.query.filter_by(visibility='visible', language='en').all()
+    return render_template('index.html', general=get_general_content(''), content=content)
 
 
-@en.route('/services')
-def services():
-    return 'Services'
-@en.route('/parsers')
-def parsers():
-    return 'Parsers'
-@en.route('/telegram_bots')
-def telegram_bots():
-    return 'Telegram bots'
-@en.route('/webapp')
-def webapp():
-    return 'Web-Application'
+@en.route('/projects/')
+def Projects():
+    content = projects.query.filter_by(visibility='visible', language='en').all()
+    return render_template('projects.html', general=get_general_content('projects'), content=content)
 
 
-@en.route('/projects')
-def projects():
-    return 'Projects'
+# --- Dynamic pages ---
+@en.route('/<main>/')
+def main(main):
+    try:
+        content = eval(main).query.filter_by(visibility='visible', language='en', url_name=main).first()
+    except:
+        abort(404)
+    return render_template(main + '.html', general=get_general_content(main), content=content)
 
 
-@en.route('/contacts')
-def contacts():
-    return 'Contacts'
+@en.route('/projects/<project_name>/')
+def project(project_name):
+    content = projects.query.filter_by(visibility='visible', language='en', url_name=project_name).first_or_404()
+    return render_template('layout_project.html', general=get_general_content(project_name), content=content)
+
+
+@en.route('/services/<service_name>/')
+def service(service_name):
+    content = services.query.filter_by(visibility='visible', language='en', url_name=service_name).first_or_404()
+    return render_template('layout_service.html', general=get_general_content(service_name), content=content)
+
+
+# Errors processing
+@en.errorhandler(404)
+def pageNotFound(error):
+    return render_template('page_not_found.html', general=get_general_content('404')), 404
 
 
 # --- DATBASE CONTENT GETTING ---
-
-def get_content(tables):
-    res = []
+def get_general_content(url_name):
+    res = {}
     try:
-        for table in tables:
-            res.append(table.query.filter_by(visibility='visible', language='ru').order_by(table.priorities).all())
+        res['Menu'] = Menu.query.filter_by(visibility='visible', language='en').order_by(Menu.priorities).all()
+        res['SEO'] = SEO.query.filter_by(language='en', url_name=url_name).first()
         return res 
     except:
-        # TODO separate Heandler and sending report to mail
-        redirect ('/')
+        abort(404)
     
     
