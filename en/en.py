@@ -9,13 +9,13 @@ en = Blueprint('en', __name__, template_folder='templates', static_folder='stati
 # --- Static pages ---
 @en.route('/')
 def index():
-    content = Index.query.filter_by(visibility='visible', language='en').all()
+    content = Index.query.filter_by(visibility='visible', language='en').first()
     return render_template('index.html', general=get_general_content(''), content=content)
 
 
 @en.route('/projects/')
 def Projects():
-    content = projects.query.filter_by(visibility='visible', language='en').all()
+    content = projects.query.filter_by(visibility='visible', language='en').order_by(projects.priorities.desc()).all()
     return render_template('projects.html', general=get_general_content('projects'), content=content)
 
 

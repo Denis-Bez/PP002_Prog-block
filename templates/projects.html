@@ -2,22 +2,28 @@
 
 {% block body %}
 
+{% for item in content %}
 <div class="container-flex project-tasks col-lg-8 mx-auto my-4 p-3">
-    {% for item in content %}
         <div class="row">  
             <div class="col-md-8 col-sm-12">
-                    <h1>{{ item.title }}</h1>
+                    <h1 class="mb-3">{{ item.title }}</h1>
+                    <hr class="col-5 col-md-3">
                     {{ item.short_discription|safe }}
-                    <div class="mb-5">
-                        <a href="{{ item.url }}" class="btn btn-primary btn-lg px-4">Подробнее</a>
+                    <div>
+                        <a href="{{ item.url }}" class="btn btn-primary btn-lg px-4">
+                        {% if item.language == 'ru' %}
+                        Подробнее
+                        {% elif item.language == 'en' %}
+                        In Detail
+                        {% endif %}
+                        </a>
                     </div> 
             </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 pt-sm-3 text-center">
                 <img src="{{ item.photo }}" class="img-fluid" alt="{{ item.title }}">
             </div>
-        </div>
-        <hr class="col-5 col-md-3 mb-5">
-    {% endfor %}
+        </div>     
 </div>
+{% endfor %}
 
 {% endblock %}

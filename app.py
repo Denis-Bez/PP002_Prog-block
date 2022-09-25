@@ -33,13 +33,13 @@ mail = Mail(application)
 # --- Static pages ---
 @application.route('/')
 def index():
-    content = Index.query.filter_by(visibility='visible', language='ru').all()
+    content = Index.query.filter_by(visibility='visible', language='ru').first()
     return render_template('index.html', general=get_general_content(''), content=content)
 
 
 @application.route('/projects/')
 def Projects():
-    content = projects.query.filter_by(visibility='visible', language='ru').all()
+    content = projects.query.filter_by(visibility='visible', language='ru').order_by(projects.priorities.desc()).all()
     return render_template('projects.html', general=get_general_content('projects'), content=content)
 
 

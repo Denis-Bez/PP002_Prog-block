@@ -1,89 +1,12 @@
 {% extends "layout.html" %}
 
 {% block header %}
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content bgg1 text-white">
-        <div class="modal-header">
-          <h5 class="modal-title" id="Modal">Оставьте заявку и мы с вами свяжемся</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <form action="{{ url_for('email') }}" method="post">
-                  <div class="mb-3">
-                    <label for="InputName1" class="form-label">Имя контактного лица</label>
-                    <input type="text" name="name" class="form-control" id="InputName1" placeholder="Имя">
-                  </div>
-  
-                  <div class="mb-3">
-                    <label for="InputPhone1" class="form-label">Номер телефона</label>
-                    <input type="text" name="phone" class="form-control" id="InputPhone1"
-                      placeholder="Телефон с кодом города">
-                  </div>
-  
-                  <div class="mb-3">
-                    <label for="InputEmail1" class="form-label">Адрес электронной почты</label>
-                    <input type="email" name="email" class="form-control" id="InputEmail1"
-                      placeholder="example@email.ru">
-                  </div>
-  
-                  <div class="mb-3">
-                    <label for="InputTextarea1" class="form-label">Обращение</label>
-                    <textarea class="form-control" name="text" id="InputTextarea1" rows="3"
-                      placeholder="Текст заявки"></textarea>
-                  </div>
-  
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="checkboxHeader" name="checkbox" checked
-                      required>
-                    <label class="form-check-label small" for="checkboxHeader">Принимаю условия «Политики конфиденциальности»</label>
-                  </div>
-  
-                  <button type="submit" name="submit" id="submitHeader" class="btn btn-primary">Отправить</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
+{{ super() }}
 {% endblock %}
 
 
 {% block body %}
-<div class="container-flex service my-4 p-3 mx-md-4">
-    <div class="row">
-        <div class="col p-4">
-            <h2 class="fw-bold">Разработка Парсеров. Программы для сбора и обработки информации и данных с веб-ресурсов</h2>
-                <p>
-                    Иногда компании сталкиваются с проблемой обработки больших объемов информации. Сотрудникам приходится тратить много времени и сил на рутинный поиск, отслеживание,
-                    структуризацию данных с различных веб-ресурсов
-                </p>
-                <p>
-                    Язык Python является одним из самых оптимальных решений для недорогой и быстрой разработки систем обработки и сбора данных. 
-                    Он позволяет реализовать многопоточный и асинхронных сбор данных. В распоряжении языка Python имеется множество библиотек позволяющих
-                    эффективно выполнить задачи по сбору данных, визуализации информации, взаимодействию с API, запуску веб-серверов.
-                </p>
 
-                <button type="button" class="btn btn-info shadow ms-auto mx-3 align-items-center" data-bs-toggle="modal" data-bs-target="#modal">Оставить заявку</button>
-        </div>
-    </div>
-</div>
-
-<div class="container-flex service service-tasks my-4 p-3 mx-md-4">
-    <div class="row">
-        <div class="col p-4">
-            <p class="fs-5 col-md-8">Наша компания готова решить следующие задачи:</p>
-            <ul>
-              <li class="fw-bold"><i class="bi bi-gear"></i>Разработка приложений для сбора данных с веб-ресурсов</li>
-            </ul>
-        </div>
-    </div>
-</div>
+    {{ content.content|safe }}
 
 {% endblock %}

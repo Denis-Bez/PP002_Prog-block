@@ -1,19 +1,12 @@
 {% extends "layout.html" %}
 
+{% block header %}
+{{ super() }}
+{% endblock %}
 
 {% block body %}
 
-<div class="section my-4">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                {% for item in content %}
-                {{ item.content }}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
+    {{ content.content|safe }}
 
 {% endblock %}
     

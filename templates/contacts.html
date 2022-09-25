@@ -2,6 +2,20 @@
 
 {% block body %}
 
-        {{ content.content }}
+<div class="container-flex project my-3 p-3 mx-md-4">
+        <h2 class="fw-bold">Контакты для связи</h2>
+        <div class="row">
+            <div class="col-md-6 col-sm-12 p-4 text-center">
+                <img src="/static/img/contacts.jpg" class="img-fluid" alt="Контакты">
+            </div>
+            <div class="col-md-6 col-sm-12 p-4">
+                <div class="col-md-6 col-sm-12 p-4 border-start">
+                    <i class="bi bi-globe2"> </i><a href="https://eg-expert.ru/" target="_blank">Ссылка на проект</a><br>
+                    <i class="bi bi-github"> </i><a href="https://github.com/Denis-Bez/MyRepose" target="_blank">Ссылка на код проекта</a><br>
+                    <i class="bi bi-code-slash"> </i><a href="/services/webapp">Разработка сайтов и веб-приложений</a><br>
+                    <i class="bi bi-speedometer"> </i><a href="/services/ads">Контекстная реклама</a>          
+            </div>
+        </div>
+</div>
 
 {% endblock %}

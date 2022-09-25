@@ -28,6 +28,7 @@
 
 
 <body>
+
     <header>
         <nav class="navbar navbar-expand-md bg-light">
             <a class="navbar-brand" href="{{ url_for('.index') }}">
@@ -73,17 +74,76 @@
                 </ul>
             </div>
         </nav>
-        {% block header %}{% endblock %}
+
+        {% block header %}
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bgg1 text-white">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="Modal">Оставьте заявку и мы с вами свяжемся</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12">
+                        <form action="{{ url_for('email') }}" method="post">
+                          <div class="mb-3">
+                            <label for="InputName1" class="form-label">Имя контактного лица</label>
+                            <input type="text" name="name" class="form-control" id="InputName1" placeholder="Имя">
+                          </div>
+          
+                          <div class="mb-3">
+                            <label for="InputPhone1" class="form-label">Номер телефона</label>
+                            <input type="text" name="phone" class="form-control" id="InputPhone1"
+                              placeholder="Телефон с кодом города">
+                          </div>
+          
+                          <div class="mb-3">
+                            <label for="InputEmail1" class="form-label">Адрес электронной почты</label>
+                            <input type="email" name="email" class="form-control" id="InputEmail1"
+                              placeholder="example@email.ru">
+                          </div>
+          
+                          <div class="mb-3">
+                            <label for="InputTextarea1" class="form-label">Обращение</label>
+                            <textarea class="form-control" name="text" id="InputTextarea1" rows="3"
+                              placeholder="Текст заявки"></textarea>
+                          </div>
+          
+                          <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="checkboxHeader" name="checkbox" checked
+                              required>
+                            <label class="form-check-label small" for="checkboxHeader">Принимаю условия «Политики конфиденциальности»</label>
+                          </div>
+          
+                          <button type="submit" name="submit" id="submitHeader" class="btn btn-primary">Отправить</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endblock %}
+    
     </header>
 
-    {% block body %}{% endblock %}
+    <main class="content">
+        {% block body %}{% endblock %}
+    </main>  
+
 
 </body>
 
-<footer class="text-muted border-top bg-light d-flex">
-    <div class="d-flex ms-5 my-5">
-    Prog-Block · © 2022
-    </div>
+<footer class="text-muted border-top bg-light">
+  <div class="d-flex ms-5 my-5">
+      Prog-Block · © 2022
+  </div>
 </footer>
+
+
 
 </html>
