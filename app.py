@@ -10,27 +10,15 @@ from spam_list import spam_filter
 from Class_SQLAlchemy import db, Menu, SEO, projects, Index, contacts, services
 from extensions import mail, application
 
-# Blueprint block
+# Blueprint block   
 from en.en import en # English language site part
 
 
 # CONFIGURATION BLOCK
-# application = Flask (__name__)
 application.register_blueprint(en, url_prefix='/en')
-
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///content.db'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(application)
-
-# application.config["SECRET_KEY"] = CONFIG['FLASK_SECRET_KEY']
-# application.config["MAIL_DEFAULT_SENDER"] = CONFIG["MAIL_DEFAULT_SENDER"]
-# application.config["MAIL_PASSWORD"] = CONFIG["MAIL_PASSWORD"]
-# application.config["MAIL_PORT"] = 465
-# application.config["MAIL_SERVER"] = "mail.eg-expert.ru"
-# application.config["MAIL_USE_TLS"] = False
-# application.config["MAIL_USE_SSL"] = True
-# application.config["MAIL_USERNAME"] = CONFIG["MAIL_USERNAME"]
-# mail = Mail(application)
 
 
 # HEANDLER BLOCK
@@ -114,7 +102,6 @@ def email():
     return redirect ("/")
 
 
-
 # --- DATBASE CONTENT GETTING ---
 def get_general_content(url_name):
     res = {}
@@ -124,6 +111,7 @@ def get_general_content(url_name):
         return res 
     except:
         abort(404)
+
 
 # --- START SERVER ---
 if __name__ == "__main__":

@@ -2,9 +2,10 @@
 
 {% block body %}
 
-<!-- TODO: Multilingual -->
-<p class="my-5 mx-3">Страница не найдена, вернуться на 
-    <a href="{{url_for('.index')}}">главную</a> 
-    страницу</p>
+{% if general['SEO'].language == 'ru' %}
+<p class="my-5 mx-3">Страница не найдена, вернуться на <a href="{{url_for('.index')}}">главную</a> страницу</p>
+{% elif general['SEO'].language == 'en' %}
+<p class="my-5 mx-3">Page not found, go to <a href="{{url_for('.index')}}">main</a> page</p>
+{% endif %}
 
 {% endblock %}
