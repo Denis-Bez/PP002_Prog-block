@@ -1,7 +1,23 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from flask_mail import Mail, Message
+
+from config import CONFIG
+
 
 db = SQLAlchemy()
+
+application = Flask(__name__)
+application.config["SECRET_KEY"] = CONFIG['FLASK_SECRET_KEY']
+application.config["MAIL_DEFAULT_SENDER"] = CONFIG["MAIL_DEFAULT_SENDER"]
+application.config["MAIL_PASSWORD"] = CONFIG["MAIL_PASSWORD"]
+application.config["MAIL_PORT"] = 465
+application.config["MAIL_SERVER"] = "mail.eg-expert.ru"
+application.config["MAIL_USE_TLS"] = False
+application.config["MAIL_USE_SSL"] = True
+application.config["MAIL_USERNAME"] = CONFIG["MAIL_USERNAME"]
+mail = Mail(application)
+
 
 
 # For creating tables need input that commands in Python's consol

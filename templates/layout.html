@@ -31,7 +31,7 @@
 
     <header>
         <nav class="navbar navbar-expand-md bg-light">
-            <a class="navbar-brand" href="{{ url_for('.index') }}">
+            <a class="navbar-brand px-2" href="{{ url_for('.index') }}">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo.png" style="max-height: 40px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -76,9 +76,11 @@
         </nav>
 
         {% block header %}
+
+        {% if general['SEO'].language == 'ru' %}
         <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content bgg1 text-white">
+              <div class="modal-content bg-light">
                 <div class="modal-header">
                   <h5 class="modal-title" id="Modal">Оставьте заявку и мы с вами свяжемся</h5>
                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
@@ -127,8 +129,68 @@
               </div>
             </div>
         </div>
+        {% elif general['SEO'].language == 'en' %}
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content bg-light">
+              <div class="modal-header">
+                <h5 class="modal-title" id="Modal">Send order and we call to you</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <form action="{{ url_for('.email') }}" method="post">
+                        <div class="mb-3">
+                          <label for="InputName1" class="form-label">Your name</label>
+                          <input type="text" name="name" class="form-control" id="InputName1" placeholder="Name">
+                        </div>
+        
+                        <div class="mb-3">
+                          <label for="InputPhone1" class="form-label">Telephone number</label>
+                          <input type="text" name="phone" class="form-control" id="InputPhone1"
+                            placeholder="Telephone with country code">
+                        </div>
+        
+                        <div class="mb-3">
+                          <label for="InputEmail1" class="form-label">Email adress</label>
+                          <input type="email" name="email" class="form-control" id="InputEmail1"
+                            placeholder="example@email.ru">
+                        </div>
+        
+                        <div class="mb-3">
+                          <label for="InputTextarea1" class="form-label">Text</label>
+                          <textarea class="form-control" name="text" id="InputTextarea1" rows="3"
+                            placeholder="Order text"></textarea>
+                        </div>
+        
+                        <div class="mb-3 form-check">
+                          <input type="checkbox" class="form-check-input" id="checkboxHeader" name="checkbox" checked
+                            required>
+                          <label class="form-check-label small" for="checkboxHeader">I accept the terms of "The user agreement"</label>
+                        </div>
+        
+                        <button type="submit" name="submit" id="submitHeader" class="btn btn-primary">Send</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
         {% endblock %}
     
+        {% for category, msg in get_flashed_messages(True) %}
+        <div class="alert alert-{{category}} alert-dismissible fade show text-center m-0" role="alert">
+          <button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>
+          {{ msg }}
+        </div>
+        {% endfor %}
     </header>
 
     <main class="content">
@@ -139,7 +201,7 @@
 </body>
 
 <footer class="text-muted border-top bg-light">
-  <div class="d-flex ms-5 my-5">
+  <div class="d-flex ms-5 py-5">
       Prog-Block · © 2022
   </div>
 </footer>

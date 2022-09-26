@@ -1,32 +1,36 @@
+import re
+
 # Flask libraries
-from flask import Flask, render_template, flash, abort
+from flask import Flask, render_template, flash, abort, redirect, request
 from flask_mail import Mail, Message
 
 # Configuratins and castom libraries
 from config import CONFIG
+from spam_list import spam_filter
 from Class_SQLAlchemy import db, Menu, SEO, projects, Index, contacts, services
+from extensions import mail, application
 
 # Blueprint block
 from en.en import en # English language site part
 
 
 # CONFIGURATION BLOCK
-SECRET_KEY = CONFIG['FLASK_SECRET_KEY']
-application = Flask (__name__)
+# application = Flask (__name__)
 application.register_blueprint(en, url_prefix='/en')
 
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///content.db'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(application)
 
-application.config["MAIL_DEFAULT_SENDER"] = CONFIG["MAIL_DEFAULT_SENDER"]
-application.config["MAIL_PASSWORD"] = CONFIG["MAIL_PASSWORD"]
-application.config["MAIL_PORT"] = 465
-application.config["MAIL_SERVER"] = "mail.eg-expert.ru"
-application.config["MAIL_USE_TLS"] = False
-application.config["MAIL_USE_SSL"] = True
-application.config["MAIL_USERNAME"] = CONFIG["MAIL_USERNAME"]
-mail = Mail(application)
+# application.config["SECRET_KEY"] = CONFIG['FLASK_SECRET_KEY']
+# application.config["MAIL_DEFAULT_SENDER"] = CONFIG["MAIL_DEFAULT_SENDER"]
+# application.config["MAIL_PASSWORD"] = CONFIG["MAIL_PASSWORD"]
+# application.config["MAIL_PORT"] = 465
+# application.config["MAIL_SERVER"] = "mail.eg-expert.ru"
+# application.config["MAIL_USE_TLS"] = False
+# application.config["MAIL_USE_SSL"] = True
+# application.config["MAIL_USERNAME"] = CONFIG["MAIL_USERNAME"]
+# mail = Mail(application)
 
 
 # HEANDLER BLOCK
@@ -70,10 +74,45 @@ def service(service_name):
 def pageNotFound(error):
     return render_template('page_not_found.html', general=get_general_content('404')), 404
 
+
 # --- Actions ---
 @application.route("/email", methods=["POST", "GET"])
 def email():
-    pass
+    if request.method == "POST":
+        # Getting client's date from form
+        name = request.form.get("name")
+        phone = request.form.get("phone")
+        email = request.form.get("email")
+        text = request.form.get("text")
+        # Create text for sending message
+        msg = Message("Заявка на экспертизу", recipients=["v417459@yandex.ru"])
+        msg_client = Message("Заявка успешно отправлена", recipients=[email])
+        msg_client.body = ("Мы получили заявку на экспертизу. Свяжемся с вами в ближайшее время для уточнения информации") 
+        # Spam filter
+        try:
+            for spam_text in spam_filter["text"]:
+                if re.search(spam_text, text):
+                    flash("Заявка распознана системой как спам! Попробуйте написать нам на почту office@eg59.ru или позвонить по телефону +7 (342) 200-85-05", category="danger")
+                    return redirect ("/")
+        except:
+            msg_error = Message("Ошибка на сайте eg59.ru", recipients=["v417459@yandex.ru"])
+            msg_error.body = ("Ошибка при работе спам-фильтра")
+            mail.send(msg_error)
+            print("text: 'None'")
+        # Sending mail
+        try:
+            mail.send(msg_client)
+            status = "Подтверждение на почту отправлено"
+        except:
+            status = "Подтверждение на почту не отправлено"
+        msg.body = (f"Имя клиента: {name}\nТелефон клиента: {phone}\nEmail заявки: {email}\nТекст заявки: {text}\nСтатус отправки письма клиенту: {status}")      
+        try:
+            mail.send(msg)
+            flash("Заявка успешно отправлена! Мы свяжемся с Вами в ближайшее время", category="success")
+        except:
+            flash("Произошла ошибка при отправке заявки. Попробуйте написать нам на почту expert@eg59.ru или позвонить по телефону +7 912-88-97-709", category="danger")        
+    return redirect ("/")
+
 
 
 # --- DATBASE CONTENT GETTING ---

@@ -1,10 +1,8 @@
-/* * {font-family: "Linux Biolinum G";} */
-* {font-family: "DejaVu Sans Mono";}
-/* * {font-family: "Marker Felt";} */
-
 :root {
     --color1: #0068B2;
 }
+
+* {font-family: "DejaVu Sans Mono", "Marker Felt", "Linux Biolinum G";}
 
 .project-tasks ul, .service-tasks ul {
     list-style: none;
