@@ -31,10 +31,11 @@
 
     <header>
         <nav class="navbar navbar-expand-md bg-light">
-            <a class="navbar-brand ps-2" href="{{ url_for('.index') }}">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo.png" style="max-height: 40px">
+            <a class="navbar-brand ps-2 mx-0" href="{{ url_for('.index') }}">
+                <img src="{{ url_for('static', filename='img/logo_full.png') }}" alt="Logo" style="max-height: 40px">
             </a>
-            <ul class="navbar-nav ms-auto ms-auto d-sm-flex d-md-none">
+            <p class="navbar-logo pe-3">WCD</p>
+            <ul class="navbar-nav ms-auto d-sm-flex d-md-none">
               <li class="nav-item m-1">
                   <a href="/"><img src="{{ url_for('static', filename='img/rus.png') }}"
                           style="max-height: 30px" class="img-fluid"></a>
@@ -47,7 +48,7 @@
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>       
-            <div class="collapse navbar-collapse pt-1" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse pt-2" id="navbarSupportedContent">
                 
                 <ul class="navbar-nav me-auto mb-lg-0">
                     {% for menu in general['Menu'] %}
@@ -205,7 +206,6 @@
         {% block body %}{% endblock %}
     </main>  
 
-
 </body>
 
 <footer class="text-muted border-top bg-light">
@@ -213,7 +213,5 @@
       WorldCadabra · © 2022
   </div>
 </footer>
-
-
 
 </html>
