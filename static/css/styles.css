@@ -2,7 +2,9 @@
     --color1: #0068B2;
 }
 
-* {font-family: "DejaVu Sans Mono", "Marker Felt", "Linux Biolinum G";}
+* {
+  font-family: "DejaVu Sans Mono";
+}
 
 .brand-color {
   color: var(--color1);
@@ -11,6 +13,10 @@
 .navbar .navbar-logo {
   font-size:16px;
   font-weight: 900;
+}
+.navbar-nav {
+  font-size:20px;
+  font-weight: 700;
 }
 
 .project-tasks ul, .service-tasks ul {

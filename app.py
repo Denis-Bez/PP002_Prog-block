@@ -1,8 +1,8 @@
 import re
 
 # Flask libraries
-from flask import Flask, render_template, flash, abort, redirect, request
-from flask_mail import Mail, Message
+from flask import render_template, flash, abort, redirect, request
+from flask_mail import Message
 
 # Configuratins and castom libraries
 from config import CONFIG
