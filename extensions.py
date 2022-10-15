@@ -5,10 +5,7 @@ from flask_mail import Mail, Message
 from config import CONFIG
 
 
-db = SQLAlchemy()
-
 application = Flask(__name__)
-
 
 application.config["SECRET_KEY"] = CONFIG['FLASK_SECRET_KEY']
 application.config["MAIL_DEFAULT_SENDER"] = CONFIG["MAIL_DEFAULT_SENDER"]
@@ -19,6 +16,12 @@ application.config["MAIL_USE_TLS"] = False
 application.config["MAIL_USE_SSL"] = True
 application.config["MAIL_USERNAME"] = CONFIG["MAIL_USERNAME"]
 mail = Mail(application)
+
+
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///content.db'
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(application)
 
 # Function for create new tables
 def create_app():

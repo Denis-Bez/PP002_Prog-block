@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /email
+Disallow: /privacy
+Sitemap: https://worldcadabra.com/sitemap.xml
+Host: https://worldcadabra.com

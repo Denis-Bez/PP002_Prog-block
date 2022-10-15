@@ -7,18 +7,12 @@ from flask_mail import Message
 # Configuratins and castom libraries
 from config import CONFIG
 from spam_list import spam_filter
-from Class_SQLAlchemy import db, Menu, SEO, projects, Index, contacts, services
+from Class_SQLAlchemy import Menu, SEO, projects, Index, contacts, services, db
 from extensions import mail, application
 
 # Blueprint block   
 from en.en import en # English language site part
-
-
-# CONFIGURATION BLOCK
 application.register_blueprint(en, url_prefix='/en')
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///content.db'
-application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(application)
 
 
 # HEANDLER BLOCK
@@ -100,6 +94,16 @@ def email():
         except:
             flash("Произошла ошибка при отправке заявки. Попробуйте написать нам на почту expert@eg59.ru или позвонить по телефону +7 912-88-97-709", category="danger")        
     return redirect ("/")
+
+
+# --- OTHER ---
+@application.route('/yandex_bc89ba786bf33137.html')
+def yandex_verification():
+    return render_template('yandex_bc89ba786bf33137.html')
+
+@application.route("/sitemap.xml")
+def sitemap():
+    return render_template('sitemap.xml')
 
 
 # --- DATBASE CONTENT GETTING ---

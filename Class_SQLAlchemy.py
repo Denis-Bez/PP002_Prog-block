@@ -87,15 +87,3 @@ class contacts(db.Model):
 
     def __repr__(self):
         return f'<contacts {self.id}>'
-
-
-
-
-
-# class services(db.Model):
-# class contacts(db.Model):
-
-# class Projects(db.Model):
-# class Services(db.Model):
-
-# class SEO(db.Model):
