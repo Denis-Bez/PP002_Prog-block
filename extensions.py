@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-from flask_mail import Mail, Message
+from flask_mail import Mail
 
 from config import CONFIG
 

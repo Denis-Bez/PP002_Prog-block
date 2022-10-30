@@ -1,14 +1,14 @@
-import re
+
 
 # Flask libraries
-from flask import render_template, flash, abort, redirect, request
-from flask_mail import Message
+from flask import render_template, abort, redirect, request
 
 # Configuratins and castom libraries
 from config import CONFIG
-from spam_list import spam_filter
+
+from extensions import application
 from Class_SQLAlchemy import Menu, SEO, projects, Index, contacts, services, db
-from extensions import mail, application
+from Class_Mail import Mail
 
 # Blueprint block   
 from en.en import en # English language site part
@@ -61,38 +61,9 @@ def pageNotFound(error):
 @application.route("/email", methods=["POST", "GET"])
 def email():
     if request.method == "POST":
-        # Getting client's date from form
-        name = request.form.get("name")
-        phone = request.form.get("phone")
-        email = request.form.get("email")
-        text = request.form.get("text")
-        # Create text for sending message
-        msg = Message("Заявка на экспертизу", recipients=["v417459@yandex.ru"])
-        msg_client = Message("Заявка успешно отправлена", recipients=[email])
-        msg_client.body = ("Мы получили заявку на экспертизу. Свяжемся с вами в ближайшее время для уточнения информации") 
-        # Spam filter
-        try:
-            for spam_text in spam_filter["text"]:
-                if re.search(spam_text, text):
-                    flash("Заявка распознана системой как спам! Попробуйте написать нам на почту office@eg59.ru или позвонить по телефону +7 (342) 200-85-05", category="danger")
-                    return redirect ("/")
-        except:
-            msg_error = Message("Ошибка на сайте eg59.ru", recipients=["v417459@yandex.ru"])
-            msg_error.body = ("Ошибка при работе спам-фильтра")
-            mail.send(msg_error)
-            print("text: 'None'")
-        # Sending mail
-        try:
-            mail.send(msg_client)
-            status = "Подтверждение на почту отправлено"
-        except:
-            status = "Подтверждение на почту не отправлено"
-        msg.body = (f"Имя клиента: {name}\nТелефон клиента: {phone}\nEmail заявки: {email}\nТекст заявки: {text}\nСтатус отправки письма клиенту: {status}")      
-        try:
-            mail.send(msg)
-            flash("Заявка успешно отправлена! Мы свяжемся с Вами в ближайшее время", category="success")
-        except:
-            flash("Произошла ошибка при отправке заявки. Попробуйте написать нам на почту expert@eg59.ru или позвонить по телефону +7 912-88-97-709", category="danger")        
+        mail = Mail(request.form, 'ru')
+        if mail.spam_filter():
+            mail.send_message()
     return redirect ("/")
 
 

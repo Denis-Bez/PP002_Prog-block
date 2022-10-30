@@ -28,7 +28,6 @@
 
 
 <body>
-
     <header>
         <nav class="navbar navbar-expand-md bg-light">
             <a class="navbar-brand ps-2 mx-0" href="{{ url_for('.index') }}">
@@ -99,27 +98,15 @@
                     <div class="row">
                       <div class="col-12">
                         <form action="{{ url_for('email') }}" method="post">
+                                   
                           <div class="mb-3">
-                            <label for="InputName1" class="form-label">Имя контактного лица</label>
-                            <input type="text" name="name" class="form-control" id="InputName1" placeholder="Имя">
+                            <label for="InputTextarea1" class="form-label">Контакты для связи</label>
+                            <textarea class="form-control" name="contacts" id="InputTextarea1" rows="2"></textarea>
                           </div>
           
                           <div class="mb-3">
-                            <label for="InputPhone1" class="form-label">Номер телефона</label>
-                            <input type="text" name="phone" class="form-control" id="InputPhone1"
-                              placeholder="Телефон с кодом города">
-                          </div>
-          
-                          <div class="mb-3">
-                            <label for="InputEmail1" class="form-label">Адрес электронной почты</label>
-                            <input type="email" name="email" class="form-control" id="InputEmail1"
-                              placeholder="example@email.ru">
-                          </div>
-          
-                          <div class="mb-3">
-                            <label for="InputTextarea1" class="form-label">Обращение</label>
-                            <textarea class="form-control" name="text" id="InputTextarea1" rows="3"
-                              placeholder="Текст заявки"></textarea>
+                            <label for="InputTextarea1" class="form-label">Текст заявки</label>
+                            <textarea class="form-control" name="text" id="InputTextarea1" rows="3"></textarea>
                           </div>
           
                           <div class="mb-3 form-check">
@@ -151,27 +138,14 @@
                   <div class="row">
                     <div class="col-12">
                       <form action="{{ url_for('.email') }}" method="post">
+                        
                         <div class="mb-3">
-                          <label for="InputName1" class="form-label">Your name</label>
-                          <input type="text" name="name" class="form-control" id="InputName1" placeholder="Name">
+                          <label for="InputTextarea1" class="form-label">Your contacts</label>
+                          <textarea class="form-control" name="contacts" id="InputTextarea1" rows="2"></textarea>
                         </div>
-        
-                        <div class="mb-3">
-                          <label for="InputPhone1" class="form-label">Telephone number</label>
-                          <input type="text" name="phone" class="form-control" id="InputPhone1"
-                            placeholder="Telephone with country code">
-                        </div>
-        
-                        <div class="mb-3">
-                          <label for="InputEmail1" class="form-label">Email adress</label>
-                          <input type="email" name="email" class="form-control" id="InputEmail1"
-                            placeholder="example@email.ru">
-                        </div>
-        
                         <div class="mb-3">
                           <label for="InputTextarea1" class="form-label">Text</label>
-                          <textarea class="form-control" name="text" id="InputTextarea1" rows="3"
-                            placeholder="Order text"></textarea>
+                          <textarea class="form-control" name="text" id="InputTextarea1" rows="3"></textarea>
                         </div>
         
                         <div class="mb-3 form-check">
