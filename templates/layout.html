@@ -53,18 +53,16 @@
                     {% for menu in general['Menu'] %}
                         {% if menu.button_type == 'menu' and not menu.parent %}
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ menu.url }}">{{menu.title}}</a>
+                                <a class="nav-link active" aria-current="page" href="{{menu.url}}">{{menu.title}}</a>
                             </li>
                         {% elif menu.button_type == 'dropmenu' and not menu.parent %}
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle active" href="{{ menu.url }}" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{menu.title}}
-                                </a>
+                                <a class="nav-link dropdown-toggle active" href="{{menu.url}}" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">{{menu.title}}</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {% for dropmenu in general['Menu'] %}
                                     {% if dropmenu.parent == menu.url_name %}
-                                    <li><a class="dropdown-item" href="{{ dropmenu.url }}">{{dropmenu.title}}</a></li>
+                                    <li><a class="dropdown-item" href="{{dropmenu.url}}">{{dropmenu.note|safe()}}{{dropmenu.title}}</a></li>
                                     {% endif %}
                                 {% endfor -%}
                                 </ul>

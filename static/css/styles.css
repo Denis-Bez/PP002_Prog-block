@@ -18,6 +18,13 @@
   font-size:20px;
   font-weight: 700;
 }
+.dropdown-menu i {
+  position: relative;
+  /* top: 5px; */
+  margin-right: 5px;
+  font-size: 16px;
+}
+
 
 .project-tasks ul, .service-tasks ul {
     list-style: none;
@@ -52,7 +59,7 @@ header {
     padding-bottom: 20px;
     position: relative;
 }
-  .container-flex h2:after {
+.container-flex h2:after {
     content: "";
     position: absolute;
     display: block;
