@@ -1,5 +1,6 @@
-# Спам фильтр при отправке заявок
-# Проверку спам фильтра можно провести с помощью метода пересечения множеств (нужна сортировка)
+# Text for spam filter. It wors, when 'text' contains inside or separately in text
 spam_filter = {
-    'text': ['nуmрhоmaniа', 'нимфoманией', 'биceкcyальнa', 'любoвью', 'href', '<', '>' , 'porn']
+    'text': ['nуmрhоmaniа', 'нимфoманией', 'биceкcyальнa', '<', '>' , 'porn', 'порно',
+    '\[url=', 'https://', 'http://', 'bit.ly/'
+    ]
 }
