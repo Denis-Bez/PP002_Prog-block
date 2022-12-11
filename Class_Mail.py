@@ -19,7 +19,6 @@ class Mail:
         self.mail_text = mail_text[lang]
         
 
-
     # It send order's information to me
     def send_message(self):
         try:
@@ -38,9 +37,17 @@ class Mail:
         try:
             # Check for empty
             if self.contacts and self.text:
-                # Spam checking
-                for spam_text in spam_filter["text"]:
-                    if re.search(spam_text, self.text) or re.search(spam_text, self.contacts):
+                
+                # Spam checking. Old algorithm
+                # for spam_text in spam_filter["text"]:
+                #     if re.search(spam_text, self.text) or re.search(spam_text, self.contacts):
+                #         flash(self.mail_text["spam_flash"], category="danger")
+                #         return False
+                
+                # Spam checking. new algorithm
+                text = self.contacts + self.text
+                for spam_text in spam_filter:
+                    if spam_text in text:
                         flash(self.mail_text["spam_flash"], category="danger")
                         return False
             else:
